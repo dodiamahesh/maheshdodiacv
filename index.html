@@ -1,342 +1,611 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Mahesh Dodia — Java Full Stack Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahesh Dodia — Java Full Stack Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #101010;
+      --card: #141414;
+      --border: #222;
+      --accent: #c8a84b;
+      --accent2: #e8c97a;
+      --text: #e8e8e4;
+      --muted: #888;
+      --dim: #555;
+      --white: #f5f5f0;
+    }
 
-:root{
-  --bg:        #0a0c10;
-  --bg2:       #0d0f15;
-  --panel:     #111318;
-  --card:      #13151c;
-  --border:    #1e2130;
-  --border2:   #262a3a;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* Professional palette */
-  --navy:      #1a2744;
-  --navy-light:#223360;
-  --gold:      #c9a84c;
-  --gold-light:#e2c47a;
-  --gold-pale: rgba(201,168,76,0.12);
-  --slate:     #4a6fa5;
-  --slate-light:#6b8fc4;
-  --cream:     #f0ede6;
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
 
-  --text:      #c8cdd8;
-  --text-dim:  #7a8098;
-  --text-mute: #454a60;
-  --white:     #eef0f6;
-}
+    /* Subtle grid overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200,168,75,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,168,75,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-html{scroll-behavior:smooth}
+    /* ──── HEADER ──── */
+    header {
+      position: relative;
+      z-index: 1;
+      padding: 64px 0 48px;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
 
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:14px;
-  line-height:1.7;
-  min-height:100vh;
-}
+    header::after {
+      content: 'MD';
+      position: absolute;
+      right: -20px;
+      top: -10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 220px;
+      font-weight: 900;
+      color: rgba(200,168,75,0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
 
-/* Subtle noise texture */
-body::before{
-  content:'';
-  position:fixed;inset:0;
-  opacity:.018;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:0;
-}
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 40px;
+    }
 
-/* ══ HERO ══ */
-.hero{
-  position:relative;
-  padding:60px 0 48px;
-  border-bottom:1px solid var(--border);
-  overflow:hidden;
-}
+    .name-block h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
 
-/* Diagonal gold band */
-.hero::before{
-  content:'';
-  position:absolute;
-  top:-60px;right:-80px;
-  width:420px;height:420px;
-  background:conic-gradient(from 200deg,transparent 60%,rgba(201,168,76,0.06) 70%,transparent 80%);
-  border-radius:50%;
-  pointer-events:none;
-}
+    .name-block h1 span {
+      color: var(--accent);
+    }
 
-.hero-inner{
-  max-width:1060px;margin:0 auto;padding:0 48px;
-  display:flex;justify-content:space-between;align-items:center;gap:48px;
-  position:relative;z-index:1;
-}
+    .title-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200,168,75,0.1);
+      border: 1px solid rgba(200,168,75,0.3);
+      color: var(--accent2);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      padding: 5px 14px;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
 
-/* Vertical gold accent line */
-.hero-left{
-  position:relative;
-  padding-left:28px;
-}
-.hero-left::before{
-  content:'';
-  position:absolute;left:0;top:4px;bottom:4px;
-  width:3px;
-  background:linear-gradient(180deg,var(--gold),rgba(201,168,76,0.2));
-  border-radius:2px;
-}
+    .title-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
 
-.eyebrow{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;letter-spacing:3px;
-  color:var(--gold);text-transform:uppercase;
-  margin-bottom:14px;
-  opacity:.85;
-}
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
 
-h1{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(52px,6vw,84px);
-  font-weight:700;
-  color:var(--white);
-  line-height:.92;
-  letter-spacing:-1.5px;
-  margin-bottom:20px;
-}
-h1 em{
-  font-style:normal;
-  color:var(--gold-light);
-}
+    .contact-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: right;
+      flex-shrink: 0;
+    }
 
-.tagline{
-  display:flex;align-items:center;gap:10px;
-  font-size:12.5px;color:var(--text-dim);
-  font-family:'JetBrains Mono',monospace;
-}
-.tagline .dot{color:var(--gold);opacity:.6;}
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: flex-end;
+      font-size: 13px;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+    }
 
-/* Contact cards */
-.hero-right{
-  display:flex;flex-direction:column;gap:8px;
-  flex-shrink:0;
-}
+    .contact-item .icon {
+      width: 16px; height: 16px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
 
-.c-card{
-  display:flex;align-items:center;gap:12px;
-  padding:10px 16px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:5px;
-  text-decoration:none;
-  min-width:270px;
-  transition:border-color .25s,background .25s;
-}
-.c-card:hover{border-color:var(--gold);background:rgba(201,168,76,0.04);}
+    .contact-item a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-item a:hover { color: var(--accent); }
 
-.c-ico{
-  width:30px;height:30px;
-  border-radius:4px;
-  background:var(--gold-pale);
-  border:1px solid rgba(201,168,76,0.2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;flex-shrink:0;
-}
+    /* ──── MAIN LAYOUT ──── */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 60px;
+    }
 
-.c-info{}
-.c-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-mute);text-transform:uppercase;margin-bottom:1px;}
-.c-val{font-size:12.5px;color:var(--text);font-weight:500;}
+    /* ──── SECTION ──── */
+    section { margin-bottom: 52px; }
 
-/* ══ BODY LAYOUT ══ */
-.page{
-  max-width:1060px;margin:0 auto;padding:0 48px;
-  position:relative;z-index:1;
-}
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
 
-.cols{
-  display:grid;
-  grid-template-columns:1fr 308px;
-  gap:0;
-}
+    .section-label span {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
 
-.main-col{
-  padding:52px 48px 64px 0;
-  border-right:1px solid var(--border);
-}
-.side-col{
-  padding:52px 0 64px 40px;
-}
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
 
-/* ══ SECTION HEADER ══ */
-.sh{
-  display:flex;align-items:center;gap:14px;
-  margin-bottom:30px;
-}
-.sh-num{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;
-  color:var(--gold);
-  opacity:.7;
-}
-.sh-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:20px;font-weight:600;
-  color:var(--white);
-  letter-spacing:.5px;
-}
-.sh-rule{
-  flex:1;height:1px;
-  background:linear-gradient(90deg,var(--border2),transparent);
-}
+    h2.section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
 
-section{margin-bottom:52px;}
+    /* ──── SUMMARY ──── */
+    .summary-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 24px 28px;
+      border-radius: 4px;
+      font-size: 14.5px;
+      color: #b0b0aa;
+      line-height: 1.8;
+    }
 
-/* ══ SUMMARY ══ */
-.summary-box{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-left:3px solid var(--gold);
-  padding:22px 26px;
-  border-radius:0 5px 5px 0;
-  font-size:13.5px;color:#919ab5;line-height:1.85;
-  margin-bottom:18px;
-}
-.summary-box strong{color:var(--text);}
+    .summary-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
 
-.pills{display:flex;flex-wrap:wrap;gap:8px;}
-.pill{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;padding:4px 12px;border-radius:3px;border:1px solid;
-  cursor:default;
-}
-.pl-g{color:var(--gold-light);border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.06);}
-.pl-s{color:var(--slate-light);border-color:rgba(107,143,196,0.3);background:rgba(107,143,196,0.06);}
-.pl-n{color:#8ab4c8;border-color:rgba(138,180,200,0.25);background:rgba(138,180,200,0.05);}
+    .pill {
+      background: rgba(200,168,75,0.07);
+      border: 1px solid rgba(200,168,75,0.2);
+      color: var(--accent2);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 2px;
+      letter-spacing: 0.5px;
+    }
 
-/* ══ EXPERIENCE ══ */
-.exp{
-  position:relative;
-  padding-left:22px;
-  margin-bottom:40px;
-}
-.exp::before{
-  content:'';position:absolute;
-  left:0;top:12px;bottom:-40px;
-  width:1px;
-  background:linear-gradient(180deg,var(--gold),transparent);
-}
-.exp:last-child::before{bottom:0;}
+    /* ──── EXPERIENCE ──── */
+    .exp-item {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 40px;
+    }
 
-.exp-dot{
-  position:absolute;left:-5px;top:10px;
-  width:11px;height:11px;
-  background:var(--gold);
-  border-radius:50%;
-  border:2px solid var(--bg);
-  box-shadow:0 0 10px rgba(201,168,76,0.5);
-}
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: -40px;
+      width: 1px;
+      background: linear-gradient(180deg, var(--accent), transparent);
+    }
 
-.exp-co{
-  font-family:'Cormorant Garamond',serif;
-  font-size:20px;font-weight:700;
-  color:var(--white);margin-bottom:2px;
-}
-.exp-role{
-  font-size:12px;font-weight:600;
-  color:var(--slate-light);
-  letter-spacing:.5px;margin-bottom:2px;
-}
-.exp-meta{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;color:var(--text-mute);margin-bottom:10px;
-}
-.client-badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:9.5px;letter-spacing:1px;text-transform:uppercase;
-  color:var(--gold);
-  background:rgba(201,168,76,0.08);
-  border:1px solid rgba(201,168,76,0.22);
-  padding:3px 10px;border-radius:3px;
-  margin-bottom:11px;
-}
-.client-badge::before{content:'CLIENT ▸';}
+    .exp-item:last-child::before { bottom: 0; }
 
-.exp-p{
-  font-size:13px;color:#838ca4;line-height:1.82;margin-bottom:11px;
-}
-.exp-p strong{color:#aab3c8;}
+    .exp-dot {
+      position: absolute;
+      left: -5px; top: 6px;
+      width: 11px; height: 11px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
 
-.chip-row{display:flex;flex-wrap:wrap;gap:5px;}
-.chip{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;padding:3px 10px;
-  background:var(--card);
-  border:1px solid var(--border2);
-  border-radius:3px;color:var(--text-mute);
-  transition:border-color .2s,color .2s;
-  cursor:default;
-}
-.chip:hover{border-color:var(--slate);color:var(--slate-light);}
+    .exp-header {
+      margin-bottom: 4px;
+    }
 
-/* ══ SIDEBAR ══ */
-.sb-blk{margin-bottom:26px;}
-.sb-blk-title{
-  font-family:'JetBrains Mono',monospace;
-  font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--slate);margin-bottom:10px;
-  display:flex;align-items:center;gap:8px;
-}
-.sb-blk-title::after{content:'';flex:1;height:1px;background:var(--border);}
+    .exp-company {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+    }
 
-.sk-list{display:flex;flex-wrap:wrap;gap:5px;}
-.sk{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10.5px;padding:4px 10px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:3px;color:var(--text-dim);
-  cursor:default;
-  transition:border-color .2s,color .2s,background .2s;
-}
-.sk:hover{
-  background:var(--gold-pale);
-  border-color:rgba(201,168,76,0.35);
-  color:var(--gold-light);
-}
+    .exp-role {
+      font-size: 13px;
+      color: var(--accent2);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
 
-/* ══ EDUCATION ══ */
-.edu{
-  padding:14px 16px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:5px;
-  margin-bottom:8px;
-  transition:border-color .2s;
-}
-.edu:hover{border-color:var(--slate);}
-.edu-deg{font-size:12.5px;font-weight:600;color:var(--white);margin-bottom:2px;}
-.edu-uni{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-mute);margin-bottom:5px;}
-.edu-gr{
-  font-family:'JetBrains Mono',monospace;font-size:9.5px;
-  color:var(--gold);
-  background:rgba(201,168,76,0.07);
-  border:1px solid rgba(201,168,76,0.18);
-  padding:2px 9px;border-radius:2px;
-  display:inline-block;
-}
+    .exp-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--dim);
+      margin-bottom: 12px;
+    }
 
-/* ══ PERSONAL ══ */
-.pr{display:flex;gap:12px;margin-bottom:9px;font-size:13px;}
-.pr-k{
-  font-family:'JetBrains Mono',monospace;
-  font-size:9.5px;color:var(--text-mute);
-  min-width:76px;padding-top:2px;
-}
-.pr-v{color:#838ca4;}
+    .exp-client {
+      display: inline-block;
+      background: rgba(200,168,75,0.08);
+      border: 1px solid rgba(200,168,75,0.15);
+      color: var(--accent);
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .exp-desc {
+      font-size: 13.5px;
+      color: #9a9a94;
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tech-tag {
+      background: #181818;
+      border: 1px solid #2a2a2a;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 10.5px;
+      padding: 3px 10px;
+      border-radius: 3px;
+    }
+
+    /* ──── SIDEBAR ──── */
+    .sidebar { }
+
+    /* ──── SKILLS ──── */
+    .skill-group { margin-bottom: 28px; }
+
+    .skill-group-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: #aaa;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 3px;
+      font-family: 'DM Mono', monospace;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .skill-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent2);
+    }
+
+    /* ──── EDUCATION ──── */
+    .edu-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 16px 18px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      transition: border-color 0.2s;
+    }
+
+    .edu-item:hover { border-color: var(--accent); }
+
+    .edu-degree {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .edu-school {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .edu-grade {
+      display: inline-block;
+      margin-top: 6px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      background: rgba(200,168,75,0.08);
+      padding: 2px 8px;
+      border-radius: 2px;
+    }
+
+    /* ──── PERSONAL ──── */
+    .personal-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .personal-row {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .personal-label {
+      color: var(--dim);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      min-width: 90px;
+      padding-top: 1px;
+    }
+
+    .personal-value {
+      color: #aaa;
+    }
+
+    /* ──── CERT ──── */
+    .cert-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .cert-icon {
+      width: 32px; height: 32px;
+      background: rgba(200,168,75,0.1);
+      border: 1px solid rgba(200,168,75,0.2);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .cert-text { font-size: 13px; color: #aaa; }
+
+    /* ──── UPLOAD / DOWNLOAD SECTION ──── */
+    .action-zone {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 0 auto 60px;
+      padding: 0 40px;
+    }
+
+    .action-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 36px 40px;
+    }
+
+    .action-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .action-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* ── Upload Zone ── */
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: 6px;
+      padding: 32px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.3s, background 0.3s;
+      position: relative;
+    }
+
+    .upload-zone:hover,
+    .upload-zone.drag-over {
+      border-color: var(--accent);
+      background: rgba(200,168,75,0.04);
+    }
+
+    #file-input { display: none; }
+
+    .upload-icon { font-size: 32px; margin-bottom: 10px; opacity: 0.7; }
+
+    .upload-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .upload-hint {
+      font-size: 12px;
+      color: var(--dim);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .upload-file-name {
+      margin-top: 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      word-break: break-all;
+      display: none;
+    }
+
+    /* ── Download Panel ── */
+    .download-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dl-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      background: var(--card);
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      color: inherit;
+    }
+
+    .dl-btn:hover {
+      border-color: var(--accent);
+      background: rgba(200,168,75,0.06);
+    }
+
+    .dl-btn-icon {
+      width: 36px; height: 36px;
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .dl-html .dl-btn-icon { background: rgba(238, 130, 80, 0.12); }
+    .dl-print .dl-btn-icon { background: rgba(100, 180, 100, 0.12); }
+
+    .dl-btn-text { flex: 1; }
+    .dl-btn-label {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .dl-btn-desc {
+      font-size: 11px;
+      color: var(--dim);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .dl-arrow {
+      color: var(--dim);
+      font-size: 16px;
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .dl-btn:hover .dl-arrow {
+      transform: translateX(4px);
+      color: var(--accent);
+    }
+
+    /* ── View toggle ── */
+    #parsed-file-view {
+      display: none;
+      margin-top: 16px;
+      background: #0d0d0d;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px;
+      max-height: 280px;
+      overflow-y: auto;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: #888;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* ──── FOOTER ──── */
+    footer {
+      text-align: center;
+      padding: 28px 40px 40px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--dim);
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
 
 /* ══ ACTION BAR ══ */
 .action-wrap{
@@ -409,25 +678,31 @@ section{margin-bottom:52px;}
   border-top:2px solid var(--gold);
 }
 
-/* ══ FOOTER ══ */
-footer{
-  text-align:center;
-  padding:18px 48px 32px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;color:var(--text-mute);
-  border-top:1px solid var(--border);
-  position:relative;z-index:1;
-}
 
-/* ══ ANIMATIONS ══ */
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.hero          {animation:fadeUp .5s ease both}
-.page          {animation:fadeUp .55s .07s ease both}
-.action-wrap   {animation:fadeUp .55s .14s ease both}
+    /* ──── ANIMATIONS ──── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-/* ══ RESPONSIVE ══ */
-@media(max-width:780px){
-  .hero-inner{flex-direction:column;align-items:flex-start}
+    header { animation: fadeUp 0.6s ease both; }
+    main { animation: fadeUp 0.7s 0.1s ease both; }
+    .action-zone { animation: fadeUp 0.7s 0.2s ease both; }
+
+    section { animation: fadeUp 0.5s ease both; }
+    section:nth-child(1) { animation-delay: 0.15s; }
+    section:nth-child(2) { animation-delay: 0.25s; }
+    section:nth-child(3) { animation-delay: 0.35s; }
+
+    /* ──── RESPONSIVE ──── */
+    @media (max-width: 720px) {
+      .header-inner { flex-direction: column; align-items: flex-start; }
+      .contact-block { text-align: left; }
+      .contact-item { justify-content: flex-start; }
+      main { grid-template-columns: 1fr; gap: 0; }
+      .action-row { grid-template-columns: 1fr; }
+	  
+	    .hero-inner{flex-direction:column;align-items:flex-start}
   .cols{grid-template-columns:1fr}
   .main-col{border-right:none;padding-right:0}
   .side-col{padding-left:0}
@@ -435,364 +710,342 @@ footer{
   .act{border-right:none;border-bottom:1px solid var(--border)}
   .act:last-child{border-bottom:none}
   .page,.action-wrap,.hero-inner{padding-left:22px;padding-right:22px}
-}
-
-@media print{
-  body::before,.hero::before{display:none}
-  .action-wrap{display:none}
-  body{background:#fff;color:#111}
-  :root{
-    --bg:#fff;--panel:#f7f7f7;--card:#f2f2f2;
-    --border:#ddd;--border2:#ccc;
-    --gold:#8a6200;--gold-light:#a07800;
-    --slate:#2a4a80;--slate-light:#3a5a9a;
-    --text:#333;--text-dim:#555;--text-mute:#888;--white:#000
-  }
-}
-</style>
+    }
+  </style>
 </head>
 <body>
 
-<!-- ══ HERO ══ -->
-<header>
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="eyebrow">Java Full Stack Developer · 9+ Years</div>
-      <h1>Mahesh<br><em>Dodia</em></h1>
-      <div class="tagline">
-        <span>Spring Boot</span>
-        <span class="dot">◆</span>
-        <span>Microservices</span>
-        <span class="dot">◆</span>
-        <span>Angular</span>
-        <span class="dot">◆</span>
-        <span>Pune, India</span>
+  <!-- ══════════ HEADER ══════════ -->
+  <header>
+    <div class="header-inner">
+      <div class="name-block">
+        <h1>Mahesh <span>Dodia</span></h1>
+        <div class="title-badge">Java Full Stack Developer · 9+ Years</div>
       </div>
-    </div>
-
-    <div class="hero-right">
-      <a class="c-card" href="tel:+919157305132">
-        <div class="c-ico">📞</div>
-        <div class="c-info">
-          <div class="c-lbl">Mobile</div>
-          <div class="c-val">(+91) 9157305132</div>
+      <div class="contact-block">
+        <div class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.1 19.79 19.79 0 0 1 1.61 2.48 2 2 0 0 1 3.58 0.3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 7.91a16 16 0 0 0 6 6l1.27-.9a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          (+91) 9157305132
         </div>
-      </a>
-      <a class="c-card" href="mailto:maheshjdodia@gmail.com">
-        <div class="c-ico">✉</div>
-        <div class="c-info">
-          <div class="c-lbl">Email</div>
-          <div class="c-val">maheshjdodia@gmail.com</div>
+        <div class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <a href="mailto:maheshjdodia@gmail.com">maheshjdodia@gmail.com</a>
         </div>
-      </a>
-      <a class="c-card" href="https://linkedin.com/in/mahesh-dodia" target="_blank">
-        <div class="c-ico">🔗</div>
-        <div class="c-info">
-          <div class="c-lbl">LinkedIn</div>
-          <div class="c-val">/in/mahesh-dodia</div>
+        <div class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+          </svg>
+          <a href="https://linkedin.com/in/mahesh-dodia" target="_blank">/in/mahesh-dodia</a>
         </div>
-      </a>
-      <div class="c-card">
-        <div class="c-ico">📍</div>
-        <div class="c-info">
-          <div class="c-lbl">Location</div>
-          <div class="c-val">Pune / Ahmedabad, India</div>
+        <div class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          Pune / Ahmedabad, India
         </div>
       </div>
     </div>
-  </div>
-</div>
-</header>
+  </header>
 
-<!-- ══ MAIN CONTENT ══ -->
-<div class="page">
-  <div class="cols">
-
-    <!-- LEFT -->
-    <div class="main-col">
+  <!-- ══════════ MAIN ══════════ -->
+  <main>
+    <!-- ── LEFT COLUMN ── -->
+    <div class="left-col">
 
       <!-- Summary -->
       <section>
-        <div class="sh">
-          <span class="sh-num">01</span>
-          <span class="sh-title">Professional Summary</span>
-          <div class="sh-rule"></div>
-        </div>
+        <div class="section-label"><span>01 · Overview</span></div>
         <div class="summary-box">
-          Java Full Stack Developer with <strong>9+ years</strong> of hands-on industry experience designing and building enterprise-grade applications. Specialises in <strong>Spring Boot microservices</strong> and <strong>Angular</strong> front-ends within Agile/Scrum environments. Proven track record across fintech, clinical research, and healthcare domains with strong emphasis on code quality, peer review, and collaborative delivery.
-        </div>
-        <div class="pills">
-          <span class="pill pl-g">Agile / Scrum</span>
-          <span class="pill pl-s">Peer Code Review</span>
-          <span class="pill pl-g">Legacy Modernisation</span>
-          <span class="pill pl-n">Multi-project Delivery</span>
-          <span class="pill pl-s">Team Mentoring</span>
+          Java Full Stack Developer with <strong style="color:var(--accent2)">9+ years</strong> of industry experience, specialising in Spring Boot microservices and Angular. Proven track record in large-scale enterprise systems across fintech, healthcare, and clinical research domains.
+          <div class="summary-pills">
+            <span class="pill">Time Management</span>
+            <span class="pill">Peer Code Review</span>
+            <span class="pill">Agile / Scrum</span>
+            <span class="pill">Multi-project Capability</span>
+            <span class="pill">Legacy Modernisation</span>
+          </div>
         </div>
       </section>
 
       <!-- Experience -->
       <section>
-        <div class="sh">
-          <span class="sh-num">02</span>
-          <span class="sh-title">Professional Experience</span>
-          <div class="sh-rule"></div>
-        </div>
+        <div class="section-label"><span>02 · Experience</span></div>
 
         <!-- Hexaware / Allianz -->
-        <div class="exp">
+        <div class="exp-item">
           <div class="exp-dot"></div>
-          <div class="exp-co">Hexaware Technologies</div>
-          <div class="exp-role">SR. SOFTWARE ENGINEER — JAVA FULL STACK</div>
-          <div class="exp-meta">January 2025 – December 2025 &nbsp;·&nbsp; Pune, India</div>
-          <span class="client-badge">&nbsp; Allianz Technology</span>
-          <p class="exp-p">
-            Contributed to the <strong>COPS System Upgrade</strong> — a large-scale financial and insurance platform enabling secure online payments via credit and debit cards. Migrated three critical applications from <strong>Java 8 → Java 17</strong> and <strong>JBoss 7.3 → JBoss 8</strong>, ensuring system stability and improved performance. Analysed legacy code for compatibility issues, refactored deprecated APIs, and optimised JBoss server configurations. Collaborated with cross-functional teams and provided post-deployment support for smooth production operations.
+          <div class="exp-header">
+            <div class="exp-company">Hexaware Technologies</div>
+            <div class="exp-role">Sr. Software Engineer — Java Full Stack</div>
+            <div class="exp-meta">Jan 2025 – Dec 2025 · Pune, India</div>
+            <span class="exp-client">Client: Allianz Technology</span>
+          </div>
+          <p class="exp-desc">
+            Contributed to COPS System Upgrade — a large-scale financial & insurance platform enabling secure online payments. Migrated three critical applications from <strong style="color:#bbb">Java 8 → Java 17</strong> and <strong style="color:#bbb">JBoss 7.3 → JBoss 8</strong>, improving performance and long-term stability. Analysed legacy code, refactored deprecated APIs, optimised server configs, and delivered post-deployment support.
           </p>
-          <div class="chip-row">
-            <span class="chip">Java 17</span><span class="chip">Spring Boot</span>
-            <span class="chip">MS-SQL</span><span class="chip">JBoss 8</span>
-            <span class="chip">Eclipse</span><span class="chip">Maven</span><span class="chip">Git</span>
+          <div class="tech-tags">
+            <span class="tech-tag">Java 17</span>
+            <span class="tech-tag">Spring Boot</span>
+            <span class="tech-tag">MS-SQL</span>
+            <span class="tech-tag">JBoss 8</span>
+            <span class="tech-tag">Eclipse</span>
+            <span class="tech-tag">Maven</span>
+            <span class="tech-tag">Git</span>
           </div>
         </div>
 
         <!-- Hexaware / Parexel -->
-        <div class="exp">
+        <div class="exp-item">
           <div class="exp-dot"></div>
-          <div class="exp-co">Hexaware Technologies</div>
-          <div class="exp-role">SR. SOFTWARE ENGINEER — JAVA FULL STACK</div>
-          <div class="exp-meta">February 2023 – December 2024 &nbsp;·&nbsp; Pune, India</div>
-          <span class="client-badge">&nbsp; Parexel</span>
-          <p class="exp-p">
-            Delivered the <strong>Resource Tracker</strong> module — a comprehensive solution automating synchronisation with Workday (employee management tool) to streamline internal employee allocation and tracking. Implemented Spring Security integrations, conducted peer code reviews, and collaborated with product analysts to refine requirements.
+          <div class="exp-header">
+            <div class="exp-company">Hexaware Technologies</div>
+            <div class="exp-role">Sr. Software Engineer — Java Full Stack</div>
+            <div class="exp-meta">Feb 2023 – Dec 2024 · Pune, India</div>
+            <span class="exp-client">Client: Parexel</span>
+          </div>
+          <p class="exp-desc">
+            Delivered the <strong style="color:#bbb">Resource Tracker</strong> module — automating sync with Workday for employee allocation and tracking. Implemented Spring Security integrations, conducted peer code reviews, and collaborated with product analysts to refine delivery scope.
           </p>
-          <div class="chip-row">
-            <span class="chip">Spring Boot</span><span class="chip">Spring Security</span>
-            <span class="chip">Angular</span><span class="chip">MS-SQL</span>
-            <span class="chip">Maven</span><span class="chip">Git</span>
+          <div class="tech-tags">
+            <span class="tech-tag">Spring Boot</span>
+            <span class="tech-tag">Spring Security</span>
+            <span class="tech-tag">Angular</span>
+            <span class="tech-tag">MS-SQL</span>
+            <span class="tech-tag">Maven</span>
+            <span class="tech-tag">Git</span>
           </div>
         </div>
 
         <!-- eClinicalWorks -->
-        <div class="exp">
+        <div class="exp-item">
           <div class="exp-dot"></div>
-          <div class="exp-co">eClinicalWorks India Pvt. Ltd</div>
-          <div class="exp-role">SOFTWARE DEVELOPER — JAVA</div>
-          <div class="exp-meta">February 2016 – November 2022 &nbsp;·&nbsp; Ahmedabad, India</div>
-          <p class="exp-p">
-            Worked on the <strong>Laboratory Information System</strong> module of Acute Care EHR — providing a comprehensive solution to automate inpatient and outpatient laboratory workflows with capability to integrate industry-leading medical devices. Responsible for robust implementation, peer code reviews, mentoring junior developers, and liaison with product analysts and QA teams.
+          <div class="exp-header">
+            <div class="exp-company">eClinicalWorks India Pvt. Ltd</div>
+            <div class="exp-role">Software Developer — Java</div>
+            <div class="exp-meta">Feb 2016 – Nov 2022 · Ahmedabad, India</div>
+          </div>
+          <p class="exp-desc">
+            Worked on the <strong style="color:#bbb">Laboratory Information System</strong> module of Acute Care EHR — automating inpatient and outpatient lab workflows with support for leading medical device integrations. Mentored junior developers, conducted reviews, and liaised with product and QA teams.
           </p>
-          <div class="chip-row">
-            <span class="chip">Spring</span><span class="chip">AngularJS v1</span>
-            <span class="chip">MS-SQL</span><span class="chip">Eclipse</span><span class="chip">Git</span>
+          <div class="tech-tags">
+            <span class="tech-tag">Spring</span>
+            <span class="tech-tag">AngularJS v1</span>
+            <span class="tech-tag">MS-SQL</span>
+            <span class="tech-tag">Eclipse</span>
+            <span class="tech-tag">Git</span>
           </div>
         </div>
 
       </section>
-
-      <!-- Training -->
-      <section>
-        <div class="sh">
-          <span class="sh-num">03</span>
-          <span class="sh-title">Certifications & Training</span>
-          <div class="sh-rule"></div>
-        </div>
-        <div style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 5px 5px 0;">
-          <span style="font-size:22px;">🏅</span>
-          <div>
-            <div style="font-size:13.5px;font-weight:600;color:var(--white);">Agile & Scrum Workshop</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-mute);">December 2018</div>
-          </div>
+	  
+	  <!-- Training -->
+	  <section>
+        <div class="section-label"><span>Training</span></div>
+		<div class="cert-item">
+          <div class="cert-icon">🏅</div>
+          <div class="cert-text">Agile & Scrum Workshop<br><span style="color:var(--dim);font-family:'DM Mono',monospace;font-size:11px">Dec 2018</span></div>
         </div>
       </section>
-
+	  
     </div>
 
-    <!-- SIDEBAR -->
-    <aside class="side-col">
+    <!-- ── RIGHT SIDEBAR ── -->
+    <aside class="sidebar">
 
       <!-- Skills -->
       <section>
-        <div class="sh">
-          <span class="sh-num">—</span>
-          <span class="sh-title">Technical Skills</span>
-          <div class="sh-rule"></div>
-        </div>
+        <div class="section-label"><span>Skills</span></div>
 
-        <div class="sb-blk">
-          <div class="sb-blk-title">Languages</div>
-          <div class="sk-list">
-            <span class="sk">Java</span><span class="sk">Java 8</span><span class="sk">Java 17</span><span class="sk">SQL</span>
+        <div class="skill-group">
+          <div class="skill-group-title">Languages</div>
+          <div class="skill-items">
+            <span class="skill-chip">Java</span>
+            <span class="skill-chip">Java 8/17</span>
+            <span class="skill-chip">SQL</span>
           </div>
         </div>
 
-        <div class="sb-blk">
-          <div class="sb-blk-title">Backend</div>
-          <div class="sk-list">
-            <span class="sk">Spring Boot</span><span class="sk">Microservices</span>
-            <span class="sk">JPA / Hibernate</span><span class="sk">Servlet</span><span class="sk">JSP</span>
+        <div class="skill-group">
+          <div class="skill-group-title">Backend</div>
+          <div class="skill-items">
+            <span class="skill-chip">Spring Boot</span>
+            <span class="skill-chip">Microservices</span>
+            <span class="skill-chip">JPA/Hibernate</span>
+            <span class="skill-chip">Servlet</span>
+            <span class="skill-chip">JSP</span>
           </div>
         </div>
 
-        <div class="sb-blk">
-          <div class="sb-blk-title">Frontend</div>
-          <div class="sk-list">
-            <span class="sk">Angular</span><span class="sk">HTML</span>
-            <span class="sk">CSS</span><span class="sk">jQuery</span><span class="sk">Bootstrap</span>
+        <div class="skill-group">
+          <div class="skill-group-title">Frontend</div>
+          <div class="skill-items">
+            <span class="skill-chip">Angular</span>
+            <span class="skill-chip">HTML</span>
+            <span class="skill-chip">CSS</span>
+            <span class="skill-chip">jQuery</span>
+            <span class="skill-chip">Bootstrap</span>
           </div>
         </div>
 
-        <div class="sb-blk">
-          <div class="sb-blk-title">DevOps & Tools</div>
-          <div class="sk-list">
-            <span class="sk">Docker</span><span class="sk">Jenkins</span>
-            <span class="sk">Kafka</span><span class="sk">Linux</span>
-            <span class="sk">Maven</span><span class="sk">JIRA</span>
-            <span class="sk">Azure Dashboard</span>
+        <div class="skill-group">
+          <div class="skill-group-title">DevOps & Tools</div>
+          <div class="skill-items">
+            <span class="skill-chip">Docker</span>
+            <span class="skill-chip">Jenkins</span>
+            <span class="skill-chip">Kafka</span>
+            <span class="skill-chip">Linux</span>
+            <span class="skill-chip">Maven</span>
+            <span class="skill-chip">JIRA</span>
           </div>
         </div>
 
-        <div class="sb-blk">
-          <div class="sb-blk-title">Testing</div>
-          <div class="sk-list">
-            <span class="sk">JUnit</span><span class="sk">Mockito</span>
-            <span class="sk">Groovy</span><span class="sk">Spock</span><span class="sk">JCOCO</span>
+        <div class="skill-group">
+          <div class="skill-group-title">Testing</div>
+          <div class="skill-items">
+            <span class="skill-chip">JUnit</span>
+            <span class="skill-chip">Mockito</span>
+            <span class="skill-chip">Groovy</span>
+            <span class="skill-chip">Spock</span>
+            <span class="skill-chip">JCOCO</span>
           </div>
         </div>
 
-        <div class="sb-blk">
-          <div class="sb-blk-title">Version Control</div>
-          <div class="sk-list">
-            <span class="sk">Git</span><span class="sk">BitBucket</span>
-            <span class="sk">Azure Repos</span><span class="sk">SourceTree</span>
-          </div>
-        </div>
-
-        <div class="sb-blk">
-          <div class="sb-blk-title">Environments</div>
-          <div class="sk-list">
-            <span class="sk">IntelliJ</span><span class="sk">Eclipse</span>
-            <span class="sk">Tomcat</span><span class="sk">JBoss</span>
+        <div class="skill-group">
+          <div class="skill-group-title">Version Control</div>
+          <div class="skill-items">
+            <span class="skill-chip">Git</span>
+            <span class="skill-chip">BitBucket</span>
+            <span class="skill-chip">Azure Repos</span>
+            <span class="skill-chip">SourceTree</span>
           </div>
         </div>
       </section>
 
       <!-- Education -->
       <section>
-        <div class="sh">
-          <span class="sh-num">—</span>
-          <span class="sh-title">Education</span>
-          <div class="sh-rule"></div>
+        <div class="section-label"><span>Education</span></div>
+
+        <div class="edu-item">
+          <div class="edu-degree">Master of Computer Application</div>
+          <div class="edu-school">GTU</div>
+          <span class="edu-grade">First Class · 66%</span>
         </div>
-        <div class="edu">
-          <div class="edu-deg">Master of Computer Application</div>
-          <div class="edu-uni">GTU</div>
-          <span class="edu-gr">First Class · 66%</span>
+        <div class="edu-item">
+          <div class="edu-degree">Bachelor of Computer Application</div>
+          <div class="edu-school">Saurashtra University, Gujarat</div>
+          <span class="edu-grade">Second Class · 55%</span>
         </div>
-        <div class="edu">
-          <div class="edu-deg">Bachelor of Computer Application</div>
-          <div class="edu-uni">Saurashtra University, Gujarat</div>
-          <span class="edu-gr">Second Class · 55%</span>
+        <div class="edu-item">
+          <div class="edu-degree">H.S.C</div>
+          <div class="edu-school">GHSEB</div>
+          <span class="edu-grade">Distinction · 72%</span>
         </div>
-        <div class="edu">
-          <div class="edu-deg">H.S.C</div>
-          <div class="edu-uni">GHSEB</div>
-          <span class="edu-gr">Distinction · 72%</span>
-        </div>
-        <div class="edu">
-          <div class="edu-deg">S.S.C</div>
-          <div class="edu-uni">GSEB</div>
-          <span class="edu-gr">First Class · 67%</span>
+        <div class="edu-item">
+          <div class="edu-degree">S.S.C</div>
+          <div class="edu-school">GSEB</div>
+          <span class="edu-grade">First Class · 67%</span>
         </div>
       </section>
 
       <!-- Personal -->
       <section>
-        <div class="sh">
-          <span class="sh-num">—</span>
-          <span class="sh-title">Personal</span>
-          <div class="sh-rule"></div>
+        <div class="section-label"><span>Personal</span></div>
+        <div class="personal-grid">
+          <div class="personal-row">
+            <span class="personal-label">Nationality</span>
+            <span class="personal-value">Indian</span>
+          </div>
+          <div class="personal-row">
+            <span class="personal-label">Languages</span>
+            <span class="personal-value">English, Hindi, Gujarati</span>
+          </div>
+          <div class="personal-row">
+            <span class="personal-label">Address</span>
+            <span class="personal-value">29/Karmajyot Soc., Talala</span>
+          </div>
         </div>
-        <div class="pr"><span class="pr-k">Nationality</span><span class="pr-v">Indian</span></div>
-        <div class="pr"><span class="pr-k">Languages</span><span class="pr-v">English, Hindi, Gujarati</span></div>
-        <div class="pr"><span class="pr-k">Address</span><span class="pr-v">29/Karmajyot Soc., Talala</span></div>
       </section>
 
     </aside>
-  </div>
-</div>
+  </main>
 
-<!-- ══ ACTION BAR — 3 in one line ══ -->
-<div class="action-wrap">
-  <div class="action-bar">
+  <!-- ══════════ UPLOAD / DOWNLOAD ══════════ -->
+  <div class="action-wrap">
+	  <div class="action-bar">
+		<!-- 2. Download uploaded file -->
+		<div class="act a-dl" id="dlCell" onclick="downloadFromGitHub()">
+		  <div class="act-ico">⬇</div>
+		  <div class="act-body">
+			<div class="act-lbl">Download Resume</div>
+			<div class="act-sub" id="dlHint">Upload a file first</div>
+		  </div>
+		  <span class="act-arr">→</span>
+		</div>
 
-    <!-- 1. Upload -->
-    <div class="act a-up" id="uploadCell">
-      <input type="file" id="pdfInput" accept=".pdf,.doc,.docx" title="Upload your resume"/>
-      <div class="act-ico">⬆</div>
-      <div class="act-body">
-        <div class="act-lbl">Upload Resume</div>
-        <div class="act-sub" id="uploadHint">PDF or DOCX · click to browse</div>
-      </div>
-      <span class="act-arr">→</span>
-    </div>
+		<!-- 3. Download HTML -->
+		<div class="act a-htm" onclick="downloadHTML()">
+		  <div class="act-ico">🌐</div>
+		  <div class="act-body">
+			<div class="act-lbl">Download as HTML</div>
+			<div class="act-sub">Save this portfolio page</div>
+		  </div>
+		  
+		</div>
 
-    <!-- 2. Download uploaded file -->
-    <div class="act a-dl" id="dlCell" onclick="downloadUploaded()">
-      <div class="act-ico">⬇</div>
-      <div class="act-body">
-        <div class="act-lbl">Download Resume</div>
-        <div class="act-sub" id="dlHint">Upload a file first</div>
-      </div>
-      <span class="act-arr">→</span>
-    </div>
+	  </div>
+	</div>
 
-    <!-- 3. Download HTML -->
-    <div class="act a-htm" onclick="downloadHTML()">
-      <div class="act-ico">🌐</div>
-      <div class="act-body">
-        <div class="act-lbl">Download as HTML</div>
-        <div class="act-sub">Save this portfolio page</div>
-      </div>
-      <span class="act-arr">→</span>
-    </div>
+  <footer>
+    © 2026 Mahesh Dodia · Built with care · India
+  </footer>
 
-  </div>
-</div>
+  <script>
+    // ── Drag & Drop ──
+    const zone = document.getElementById('upload-zone');
+    const input = document.getElementById('file-input');
+    const nameDisplay = document.getElementById('file-name-display');
+    const parsedView = document.getElementById('parsed-file-view');
 
-<footer>
-  Mahesh Dodia &nbsp;·&nbsp; Java Full Stack Developer &nbsp;·&nbsp; India &nbsp;·&nbsp; 2026
-</footer>
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (file) handleFile(file);
+    });
 
-<script>
-  let uploadedFile = null;
-  let uploadedURL  = null;
+    input.addEventListener('change', () => {
+      if (input.files[0]) handleFile(input.files[0]);
+    });
 
-  const pdfInput   = document.getElementById('pdfInput');
-  const uploadHint = document.getElementById('uploadHint');
-  const dlHint     = document.getElementById('dlHint');
 
-  pdfInput.addEventListener('change', () => {
-    const file = pdfInput.files[0];
-    if (!file) return;
-    uploadedFile = file;
-    if (uploadedURL) URL.revokeObjectURL(uploadedURL);
-    uploadedURL = URL.createObjectURL(file);
+    // ── Download HTML ──
+    function downloadHTML(e) {
+      e.preventDefault();
+      const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Mahesh_Dodia_Resume.html';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+	
+	  function downloadFromGitHub() {
+		  const fileUrl = "https://raw.githubusercontent.com/dodiamahesh/maheshdodiacv/main/Mahesh_Dodia_CV_2026.pdf";
 
-    uploadHint.textContent = '✓ ' + file.name;
-    uploadHint.classList.add('ready');
-
-    dlHint.textContent = file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)';
-    dlHint.classList.add('ready');
-  });
-
-  function downloadUploaded() {
-    if (!uploadedURL) { alert('Please upload a file first.'); return; }
-    const a = document.createElement('a');
-    a.href = uploadedURL;
-    a.download = uploadedFile.name;
-    a.click();
-  }
+		  const a = document.createElement('a');
+		  a.href = fileUrl;
+		  a.download = "mahesh-cv.html"; // you can rename
+		  document.body.appendChild(a);
+		  a.click();
+		  document.body.removeChild(a);
+		}
 
   function downloadHTML() {
     const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
@@ -803,7 +1056,23 @@ footer{
     a.click();
     URL.revokeObjectURL(url);
   }
-</script>
+  </script>
 
+  <!-- Print styles -->
+  <style>
+    @media print {
+      body::before { display: none; }
+      header::after { display: none; }
+      .action-zone { display: none; }
+      footer { display: none; }
+      body { background: #fff; color: #111; }
+      :root {
+        --bg: #fff; --surface: #f5f5f5; --card: #f9f9f9;
+        --border: #ddd; --accent: #8a6a1a; --accent2: #a07820;
+        --text: #222; --muted: #555; --dim: #888; --white: #000;
+      }
+      .skill-chip, .tech-tag, .pill { background: #eee; border-color: #ccc; }
+    }
+  </style>
 </body>
 </html>
